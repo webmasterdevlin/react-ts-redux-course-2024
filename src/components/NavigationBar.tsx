@@ -6,12 +6,17 @@ import {
   makeStyles,
   Toolbar,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { pathNames } from "../LazyRoutes";
+import { RootState } from "../store/reducers";
+import TotalOfCharacters from "./TotalOfCharacters";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
+
+  const store = useSelector((state: RootState) => state);
 
   return (
     <AppBar position="static" style={{ marginBottom: "2rem" }}>
@@ -33,6 +38,10 @@ const NavigationBar = () => {
           >
             HEROES
           </Button>
+          <TotalOfCharacters
+            collection={store.hero.heroes}
+            dataTestId={"total-heroes"}
+          />
         </Box>
         <Box>
           <Button
