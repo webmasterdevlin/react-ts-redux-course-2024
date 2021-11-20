@@ -24,4 +24,24 @@ export const pathNames: Paths = {
   villains: "/villains",
 };
 
+const lazyRoutes: RouteObject[] = [
+  {
+    path: pathNames.home,
+    element: <HomePage />,
+  },
+  {
+    path: pathNames.heroes,
+    element: <HeroesPage />,
+  },
+  {
+    path: pathNames.villains,
+    element: <VillainsPage />,
+  },
+];
 
+const LazyRoutes = () => {
+  const contents = useRoutes(lazyRoutes);
+  return <>{contents}</>;
+};
+
+export default LazyRoutes;
