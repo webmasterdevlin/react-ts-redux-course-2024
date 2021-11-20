@@ -9,6 +9,6 @@ export const getHeroesAction = createAsyncThunk(
     // HTTP CALLS
     const response = await getAxios<HeroModel[]>(EndPoints.heroes);
     // Return the response
-    return response.data;
+    return response.data; // payload
   }
 );
