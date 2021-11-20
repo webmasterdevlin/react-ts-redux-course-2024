@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroesAction } from "../features/heroes/heroAsyncActions";
+import { softDeleteHeroAction } from "../features/heroes/heroSlice";
 import { RootState } from "../store/reducers";
 
 const HeroesPage = () => {
@@ -62,6 +63,7 @@ const HeroesPage = () => {
                   variant={"contained"}
                   color={"secondary"}
                   data-testid={"remove-button"}
+                  onClick={() => dispatch(softDeleteHeroAction(h.id))}
                 >
                   Remove
                 </Button>{" "}

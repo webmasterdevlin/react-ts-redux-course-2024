@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getHeroesAction } from "./heroAsyncActions";
 import { HeroModel, heroNamespace, HeroStateType } from "./heroTypes";
 
@@ -13,9 +13,15 @@ export const initialState: HeroStateType = {
 export const heroSlice = createSlice({
   name: heroNamespace,
   initialState: initialState,
-  reducers: {},
 
-  // mutation using asynchronous actions
+  // mutation using synchronous actions or without side effects
+  reducers: {
+    softDeleteHeroAction: (state, action: PayloadAction<string>) => {
+      state.heroes = state.heroes.filter((h) => h.id !== action.payload); // payload is the id of the object
+    },
+  },
+
+  // mutation using asynchronous actions or with side effects
   extraReducers: (builder) => {
     builder.addCase(getHeroesAction.pending, (state, action) => {
       state.loading = true;
@@ -33,5 +39,8 @@ export const heroSlice = createSlice({
   // big switch cases
   // big if-else
 });
+
+// non-async actions
+export const { softDeleteHeroAction } = heroSlice.actions;
 
 export default heroSlice.reducer;
