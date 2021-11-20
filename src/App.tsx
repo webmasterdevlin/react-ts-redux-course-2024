@@ -1,4 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
+import { Container, CssBaseline } from "@material-ui/core";
 import { BrowserRouter } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import EagerRoutes from "./EagerRoutes";
@@ -10,7 +10,9 @@ function App() {
       <BrowserRouter>
         <>
           <NavigationBar />
-          <LazyRoutes />
+          <Container>
+            <LazyRoutes />
+          </Container>
         </>
       </BrowserRouter>
     </CssBaseline>
