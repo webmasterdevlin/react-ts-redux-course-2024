@@ -1,11 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
+import NavigationBar from "./components/NavigationBar";
 import EagerRoutes from "./EagerRoutes";
 import LazyRoutes from "./LazyRoutes";
 
 function App() {
   return (
     <BrowserRouter>
-      <LazyRoutes />
+      <>
+        <NavigationBar />
+        <LazyRoutes />
+      </>
     </BrowserRouter>
   );
 }
