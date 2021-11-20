@@ -33,3 +33,5 @@ export const heroSlice = createSlice({
   // big switch cases
   // big if-else
 });
+
+export default heroSlice.reducer;
