@@ -9,7 +9,7 @@ const HomePage = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Typography variant={"h2"}>
+      <Typography variant={"h2"} data-testid="home-title">
         Welcome to Redux Toolkit Course 🧑‍🏫 💻
       </Typography>
     </Box>
