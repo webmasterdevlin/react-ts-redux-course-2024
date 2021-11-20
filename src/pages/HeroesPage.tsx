@@ -6,7 +6,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroesAction } from "../features/heroes/heroAsyncActions";
 import { RootState } from "../store/reducers";
@@ -17,6 +17,9 @@ const HeroesPage = () => {
 
   const smallScreen = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
+
+  // local state
+  const [counter, setCounter] = useState("0");
 
   useEffect(() => {
     // dispatch with action
@@ -42,7 +45,7 @@ const HeroesPage = () => {
             >
               <Typography>
                 <span>{`${h.firstName} ${h.lastName} is ${h.knownAs}`}</span>
-                <span> - marked</span>
+                {counter === h.id && <span> - marked</span>}
               </Typography>
               <div>
                 <Button
@@ -50,6 +53,7 @@ const HeroesPage = () => {
                   variant={"contained"}
                   color={"default"}
                   data-testid={"mark-button"}
+                  onClick={() => setCounter(h.id)}
                 >
                   Mark
                 </Button>{" "}
