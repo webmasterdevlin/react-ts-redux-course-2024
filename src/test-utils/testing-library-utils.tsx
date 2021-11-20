@@ -1,27 +1,30 @@
-import { ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
+import React from "react";
+import { render as rtlRender } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Container } from "@material-ui/core";
 import NavigationBar from "../components/NavigationBar";
+import { configureAppStore } from "../store/configureStore";
 
-const AllTheProviders: React.FC = ({ children }: any) => {
-  return (
-    <CssBaseline>
-      <BrowserRouter>
-        <>
-          <NavigationBar />
-          <Container>{children}</Container>
-        </>
-      </BrowserRouter>
-    </CssBaseline>
+const render = (ui, { store = configureAppStore(), ...renderOptions } = {}) => {
+  const Wrapper = ({ children }) => (
+    <Provider store={store}>
+      <CssBaseline>
+        <BrowserRouter>
+          <>
+            <NavigationBar />
+            <Container>{children}</Container>
+          </>
+        </BrowserRouter>
+      </CssBaseline>
+    </Provider>
   );
+
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 };
 
-const customRender = (
-  ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
-) => render(ui, { wrapper: AllTheProviders, ...options });
-
+// re-export everything
 export * from "@testing-library/react";
-export { customRender as render };
+// override render method
+export { render };
