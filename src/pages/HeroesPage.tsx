@@ -29,6 +29,7 @@ const HeroesPage = () => {
 
   return (
     <div>
+      <h1 data-testid="title-page">Heroes</h1>
       <>
         {loading ? (
           <Typography data-testid={"loading"} variant={"h2"}>
