@@ -34,7 +34,7 @@ const HeroesPage = () => {
 
   return (
     <div>
-      <TitleBar title={"Heroes Page"} />
+      <TitleBar title={"Super Heroes Page"} />
       <FormSubmission handleCreateAction={postHeroAction} />
       <UpdateUiLabel />
       <>
@@ -88,6 +88,17 @@ const HeroesPage = () => {
           ))
         )}
       </>
+      {heroes.length === 0 && !loading && (
+        <Button
+          data-testid={"refetch-button"}
+          className={classes.button}
+          variant={"contained"}
+          color={"primary"}
+          onClick={() => dispatch(getHeroesAction())}
+        >
+          Re-fetch
+        </Button>
+      )}
     </div>
   );
 };
