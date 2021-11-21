@@ -4,6 +4,8 @@ import { delay } from "cypress/types/bluebird";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormSubmission from "../components/FormSubmission";
+import TitleBar from "../components/TitleBar";
+import UpdateUiLabel from "../components/UpdateUiLabel";
 
 import {
   deleteHeroAction,
@@ -32,8 +34,9 @@ const HeroesPage = () => {
 
   return (
     <div>
-      <h1 data-testid="title-page">Heroes</h1>
+      <TitleBar title={"Heroes Page"} />
       <FormSubmission handleCreateAction={postHeroAction} />
+      <UpdateUiLabel />
       <>
         {loading ? (
           <Typography data-testid={"loading"} variant={"h2"}>
