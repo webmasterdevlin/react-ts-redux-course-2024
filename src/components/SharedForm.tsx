@@ -1,5 +1,5 @@
 import { Form, useFormikContext } from "formik";
-import SharedInput from "./ShareInput";
+import SharedInput from "./SharedInput";
 import { Box, Paper, Button } from "@mui/material";
 
 const SharedForm = () => {
