@@ -1,7 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Field, useFormikContext } from "formik";
-import { HeroModel } from "../features/heroes/heroTypes";
 
 type Props = {
   id: string;
