@@ -22,4 +22,5 @@ export const heroNamespace = "hero";
 export const HeroActionTypes = {
   FETCH_HEROES: `${heroNamespace}/FETCH_HEROES`,
   REMOVE_HERO_BY_ID: `${heroNamespace}/REMOVE_HERO_BY_ID`,
+  ADD_HERO: `${heroNamespace}/ADD_HERO`,
 };

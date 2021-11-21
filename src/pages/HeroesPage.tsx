@@ -8,6 +8,7 @@ import FormSubmission from "../components/FormSubmission";
 import {
   deleteHeroAction,
   getHeroesAction,
+  postHeroAction,
 } from "../features/heroes/heroAsyncActions";
 import { softDeleteHeroAction } from "../features/heroes/heroSlice";
 import { RootState } from "../store/reducers";
@@ -32,7 +33,7 @@ const HeroesPage = () => {
   return (
     <div>
       <h1 data-testid="title-page">Heroes</h1>
-      <FormSubmission handleCreateAction={() => {}} />
+      <FormSubmission handleCreateAction={postHeroAction} />
       <>
         {loading ? (
           <Typography data-testid={"loading"} variant={"h2"}>
