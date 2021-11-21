@@ -23,7 +23,9 @@ const HeroesPage = () => {
 
   useEffect(() => {
     // dispatch with action
-    dispatch(getHeroesAction());
+    if (heroes.length === 0) {
+      dispatch(getHeroesAction());
+    }
   }, [dispatch]);
 
   return (
