@@ -16,6 +16,6 @@ export const getHeroesAction = createAsyncThunk(
 export const deleteHeroAction = createAsyncThunk(
   HeroActionTypes.REMOVE_HERO_BY_ID,
   async (id: string) => {
-    return await deleteAxios<void>(EndPoints.heroes, id);
+    return await deleteAxios(EndPoints.heroes, id);
   }
 );

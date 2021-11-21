@@ -1,9 +1,13 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
+import { delay } from "cypress/types/bluebird";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getHeroesAction } from "../features/heroes/heroAsyncActions";
+import {
+  deleteHeroAction,
+  getHeroesAction,
+} from "../features/heroes/heroAsyncActions";
 import { softDeleteHeroAction } from "../features/heroes/heroSlice";
 import { RootState } from "../store/reducers";
 
@@ -67,6 +71,7 @@ const HeroesPage = () => {
                   variant={"outlined"}
                   color={"secondary"}
                   data-testid={"delete-button"}
+                  onClick={() => dispatch(deleteHeroAction(h.id))}
                 >
                   DELETE in DB
                 </Button>

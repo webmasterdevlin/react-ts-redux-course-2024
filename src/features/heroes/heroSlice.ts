@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getHeroesAction } from "./heroAsyncActions";
+import { deleteHeroAction, getHeroesAction } from "./heroAsyncActions";
 import { HeroModel, heroNamespace, HeroStateType } from "./heroTypes";
 
 // hero state
@@ -33,6 +33,18 @@ export const heroSlice = createSlice({
     builder.addCase(getHeroesAction.rejected, (state, action: any) => {
       console.log(action.error);
       state.loading = false;
+    });
+
+    // DELETE - optimistic update
+    builder.addCase(deleteHeroAction.pending, (state, action) => {
+      state.tempData = [...state.heroes]; // for rolling back
+
+      const index = state.heroes.findIndex((h) => h.id === action.meta.arg);
+      state.heroes.splice(index, 1);
+    });
+
+    builder.addCase(deleteHeroAction.rejected, (state, action: any) => {
+      state.heroes = state.tempData as HeroModel[];
     });
   },
 });
