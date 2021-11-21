@@ -11,16 +11,23 @@ const SharedForm = () => {
         <Form style={{ padding: "1rem" }}>
           <div>
             <SharedInput
+              required={true}
               id={"firstName"}
               label={"First Name"}
               dataTestId={"firstName"}
             />
             <SharedInput
+              required={true}
               id={"lastName"}
               label={"Last Name"}
               dataTestId={"lastName"}
             />
-            <SharedInput id={"house"} label={"House"} dataTestId={"house"} />
+            <SharedInput
+              required={true}
+              id={"house"}
+              label={"House"}
+              dataTestId={"house"}
+            />
             <SharedInput
               id={"knownAs"}
               label={"Known As"}
@@ -39,7 +46,7 @@ const SharedForm = () => {
           </Button>
         </Form>
         {process.env.NODE_ENV !== "production" && (
-          <pre>{JSON.stringify(formik.values, null, 2)}</pre>
+          <pre>{JSON.stringify(formik, null, 2)}</pre>
         )}
       </Paper>
     </Box>

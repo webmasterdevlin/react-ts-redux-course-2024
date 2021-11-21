@@ -22,7 +22,7 @@ const FormSubmission = ({ handleCreateAction }: Props) => {
         firstName: yup.string().label("First Name").min(2).required(),
         lastName: yup.string().label("Last Name").min(2).required(),
         house: yup.string().label("House").required(),
-        knownAs: yup.string().label("Known as").required(),
+        knownAs: yup.string().label("Known as"),
       })}
       onSubmit={(values, actions) => {
         dispatch(handleCreateAction(values));
