@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from "@mui/styles";
 import { delay } from "cypress/types/bluebird";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FormSubmission from "../components/FormSubmission";
 
 import {
   deleteHeroAction,
@@ -31,6 +32,7 @@ const HeroesPage = () => {
   return (
     <div>
       <h1 data-testid="title-page">Heroes</h1>
+      <FormSubmission handleCreateAction={() => {}} />
       <>
         {loading ? (
           <Typography data-testid={"loading"} variant={"h2"}>
