@@ -27,4 +27,20 @@ describe("Heroes Page", () => {
     const cards = await screen.findAllByTestId("card");
     expect(cards[0]).toHaveTextContent("marked");
   });
+
+  it("should remove a hero from the store", async () => {
+    render(<HeroesPage />);
+
+    const buttons = await screen.findAllByTestId("remove-button");
+    userEvent.click(buttons[0]);
+    expect(screen.getByTestId("total-heroes")).toHaveTextContent("1");
+  });
+
+  it("should remove a hero from the store and database", async () => {
+    render(<HeroesPage />);
+
+    const buttons = await screen.findAllByTestId("delete-button");
+    userEvent.click(buttons[0]);
+    expect(screen.getByTestId("total-heroes")).toHaveTextContent("1");
+  });
 });

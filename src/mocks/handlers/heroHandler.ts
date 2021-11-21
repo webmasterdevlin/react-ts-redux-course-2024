@@ -23,4 +23,10 @@ export const heroHandler = [
   rest.get(`${baseUrl}/heroes`, (req, res, ctx) => {
     return res(ctx.json(heroesFixture));
   }),
+
+  rest.delete(`${baseUrl}/heroes/:id`, (req, res, ctx) => {
+    return heroesFixture.find((h) => h.id === req.params.id)
+      ? res(ctx.status(200))
+      : res(ctx.status(404));
+  }),
 ];
