@@ -35,9 +35,6 @@ export const heroSlice = createSlice({
       state.loading = false;
     });
   },
-
-  // big switch cases
-  // big if-else
 });
 
 // non-async actions

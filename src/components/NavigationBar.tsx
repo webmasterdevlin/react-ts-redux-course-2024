@@ -1,11 +1,5 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  createStyles,
-  makeStyles,
-  Toolbar,
-} from "@material-ui/core";
+import { AppBar, Box, Button, Toolbar } from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { pathNames } from "../LazyRoutes";

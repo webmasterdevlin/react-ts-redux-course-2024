@@ -1,8 +1,7 @@
-import { Container, CssBaseline } from "@material-ui/core";
+import { Container, CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
-import EagerRoutes from "./EagerRoutes";
 import LazyRoutes from "./LazyRoutes";
 import { configureAppStore } from "./store/configureStore";
 

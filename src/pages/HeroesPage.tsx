@@ -1,13 +1,8 @@
-import {
-  Box,
-  Button,
-  createStyles,
-  makeStyles,
-  Typography,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getHeroesAction } from "../features/heroes/heroAsyncActions";
 import { softDeleteHeroAction } from "../features/heroes/heroSlice";
 import { RootState } from "../store/reducers";
@@ -25,7 +20,7 @@ const HeroesPage = () => {
   useEffect(() => {
     // dispatch with action
     dispatch(getHeroesAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -53,7 +48,6 @@ const HeroesPage = () => {
                 <Button
                   className={classes.button}
                   variant={"contained"}
-                  color={"default"}
                   data-testid={"mark-button"}
                   onClick={() => setCounter(h.id)}
                 >
