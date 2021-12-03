@@ -8,6 +8,7 @@
 - tailwindcss
 - material-ui
 - antd
+- chakra ui
 - styled-components
 - emotion
 
@@ -77,3 +78,57 @@
 - dispatch the getHeroesAction inside the useHook
 - run the application, npm run start:fullstack and see the devtools if response i 200ok
 - map the heroes and render all the heroes
+- use the boolean loading state to show the loading message while fetching the data
+- add the mark button functionality for every hero
+
+## Set up React Testing Library
+
+- create ./src/test-utils/testing-library-util.tsx that will be a copy of the root component
+
+## Set up MSW for mocking API calls
+
+- npm i -D msw
+- the msw is a mocking library which will intercept the requests and responses in the integration tests
+- create ./src/mocks/handler/heroHandler.ts
+- create ./src/mocks/handler/index.ts
+- create ./src/mocks/server.ts
+- update the ./src/setupTests.ts
+
+## Integration tests
+
+- write integration tests, ./src/pages/tests/HeroesPage.test.ts, check if title and loading message is appearing
+- write a test if the mark message will appear after clicking the mark button
+
+## Delete hero from the UI (store)
+
+- create a function to temporary delete a hero
+- create a button to temporary delete a hero
+
+## Delete hero from the UI (store)
+
+- create a function to temporary delete a hero by updating the ./src/feature/heroes s
+- update the heroTypes.ts
+- update the heroSlice.ts
+- create a button to temporary delete a hero
+- add a test for temporary remove of hero
+
+## Delete hero from the UI (store) and from the database
+
+- create a function to permanently delete a hero by updating the ./src/feature/heroes
+- update the heroTypes.ts
+- update the heroAsyncActions.ts
+- update the heroSlice.ts
+- create a button to permanently delete a hero
+- add a test for permanent delete a hero
+
+## Add hero
+
+- npm i formik yup
+- create a function to add a hero by updating the ./src/feature/heroes
+- update the heroTypes.ts
+- update the heroAsyncActions.ts
+- update the heroSlice.ts
+- npm i formik yup
+- create the SharedInput.tsx, ShareForm.tsx, and FormSubmission.tsx in the components folder
+- create a button to add a hero
+- import the FormSubmission on the HeroesPage and past the postHeroAction
