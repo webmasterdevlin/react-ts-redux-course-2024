@@ -18,6 +18,7 @@
 
 #### Future pages will be registered in your router.
 
+- npm i -D prettier
 - create ./src/pages/HomePage.tsx, ./src/pages/AnotherPage.tsx, etc, with the name of the page as the h1 for POC
 - npm i react-router react-router-dom
 - create a component, EagerRoutes.tsx, to register the pages
