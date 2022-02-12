@@ -69,5 +69,3 @@ export const heroSlice = createSlice({
 
 // non-async actions
 export const { softDeleteHeroAction } = heroSlice.actions;
-
-export default heroSlice.reducer;

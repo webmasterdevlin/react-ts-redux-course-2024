@@ -41,6 +41,6 @@ describe("Heroes Page", () => {
 
     const buttons = await screen.findAllByTestId("delete-button");
     userEvent.click(buttons[0]);
-    expect(screen.getByTestId("total-heroes")).toHaveTextContent("1");
+    expect(screen.getByTestId("total-heroes")).toHaveTextContent("0");
   });
 });

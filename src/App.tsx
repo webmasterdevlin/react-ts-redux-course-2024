@@ -3,13 +3,11 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import LazyRoutes from "./LazyRoutes";
-import { configureAppStore } from "./store/configureStore";
-
-export const store = configureAppStore();
+import { reduxStore } from "./store/configureStore";
 
 function App() {
   return (
-    <Provider store={store}>
+    <Provider store={reduxStore}>
       <CssBaseline>
         <BrowserRouter>
           <>

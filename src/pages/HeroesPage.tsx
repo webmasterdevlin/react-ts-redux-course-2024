@@ -1,8 +1,6 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { delay } from "cypress/types/bluebird";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import FormSubmission from "../components/FormSubmission";
 import TitleBar from "../components/TitleBar";
 import UpdateUiLabel from "../components/UpdateUiLabel";
@@ -13,11 +11,11 @@ import {
   postHeroAction,
 } from "../features/heroes/heroAsyncActions";
 import { softDeleteHeroAction } from "../features/heroes/heroSlice";
-import { RootState } from "../store/reducers";
+import { useAppDispatch, useAppSelector } from "../store/configureStore";
 
 const HeroesPage = () => {
-  const dispatch = useDispatch();
-  const { heroes, loading } = useSelector((state: RootState) => state.hero);
+  const dispatch = useAppDispatch();
+  const { heroes, loading } = useAppSelector((state) => state.hero);
 
   const smallScreen = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
@@ -30,7 +28,7 @@ const HeroesPage = () => {
     if (heroes.length === 0) {
       dispatch(getHeroesAction());
     }
-  }, [dispatch]);
+  }, [dispatch, heroes.length]);
 
   return (
     <div>

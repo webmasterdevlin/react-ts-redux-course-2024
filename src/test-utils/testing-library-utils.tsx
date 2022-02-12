@@ -10,7 +10,7 @@ import { EnhancedStore } from "@reduxjs/toolkit";
 import { Container, CssBaseline } from "@mui/material";
 
 import NavigationBar from "../components/NavigationBar";
-import { configureAppStore } from "../store/configureStore";
+import { reduxStore } from "../store/configureStore";
 
 type ReduxRenderOptions = {
   store?: EnhancedStore;
@@ -19,7 +19,7 @@ type ReduxRenderOptions = {
 
 const render = (
   ui: ReactElement,
-  { store = configureAppStore(), ...renderOptions }: ReduxRenderOptions = {}
+  { store = reduxStore, ...renderOptions }: ReduxRenderOptions = {}
 ): RenderResult => {
   function Wrapper({ children }: { children?: ReactNode }): ReactElement {
     return (

@@ -1,16 +1,14 @@
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { pathNames } from "../LazyRoutes";
-import { RootState } from "../store/reducers";
 import TotalOfCharacters from "./TotalOfCharacters";
+import { useAppSelector } from "../store/configureStore";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
-
-  const store = useSelector((state: RootState) => state);
+  const { heroes } = useAppSelector((state) => state.hero);
 
   return (
     <AppBar position="static" style={{ marginBottom: "2rem" }}>
@@ -32,10 +30,7 @@ const NavigationBar = () => {
           >
             HEROES
           </Button>
-          <TotalOfCharacters
-            collection={store.hero.heroes}
-            dataTestId={"total-heroes"}
-          />
+          <TotalOfCharacters collection={heroes} dataTestId={"total-heroes"} />
         </Box>
         <Box>
           <Button

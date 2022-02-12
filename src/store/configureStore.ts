@@ -1,25 +1,30 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { forceReducerReload } from "redux-injectors";
-import { createReducer } from "./reducers";
+import { save, load } from "redux-localstorage-simple";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { heroSlice } from "../features/heroes/heroSlice";
 
-export function configureAppStore() {
-  const store = configureStore({
-    reducer: createReducer(),
-    middleware: (getDefaultMiddleware) => [
-      ...getDefaultMiddleware({
-        serializableCheck: false,
-      }),
-    ],
-    devTools:
-      process.env.NODE_ENV !== "production" ||
-      process.env.PUBLIC_URL.length > 0,
-  });
+const reduxStore = configureStore({
+  preloadedState: load(),
 
-  if ((module as any).hot) {
-    (module as any).hot.accept("./reducers", () => {
-      forceReducerReload(store);
-    });
-  }
+  reducer: {
+    hero: heroSlice.reducer,
+  },
 
-  return store;
-}
+  middleware: (getDefaultMiddleware) => [
+    save(),
+    ...getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  ],
+
+  devTools:
+    process.env.NODE_ENV !== "production" || process.env.PUBLIC_URL.length > 0,
+});
+
+export type RootState = ReturnType<typeof reduxStore.getState>;
+export type AppDispatch = typeof reduxStore.dispatch;
+
+const useAppDispatch = () => useDispatch<AppDispatch>();
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export { reduxStore, useAppDispatch, useAppSelector };
