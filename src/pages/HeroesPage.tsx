@@ -10,8 +10,15 @@ import {
   getHeroesAction,
   postHeroAction,
 } from "../features/heroes/heroAsyncActions";
-import { softDeleteHeroAction } from "../features/heroes/heroSlice";
+import {
+  saveHeroList,
+  removeHeroFromStore,
+  triggerLoading,
+} from "../features/heroes/heroSlice";
 import { useAppDispatch, useAppSelector } from "../store/configureStore";
+import { deleteAxios, getAxios } from "../axios/generic-api-calls";
+import { HeroModel } from "../features/heroes/heroTypes";
+import { EndPoints } from "../axios/api-config";
 
 const HeroesPage = () => {
   const dispatch = useAppDispatch();
@@ -24,11 +31,77 @@ const HeroesPage = () => {
   const [counter, setCounter] = useState("0");
 
   useEffect(() => {
-    // dispatch with action
-    if (heroes.length === 0) {
-      dispatch(getHeroesAction());
+    dispatch(getHeroesAction());
+    // handleGetHeroes();
+    // handleFetchHeroes();
+  }, [dispatch]);
+
+  /*
+   *  IF NO heroAsyncActions.ts and extraReducers
+   *  Can avoid race condition issue
+   *  Can be used with multiple HTTP request
+   *  Can be used with states that don't belong in the store
+   *  Can easily be understood by develops who are new to React Redux
+   *  Easy to reason about
+   *  Easy to do optimistic updates
+   * */
+  const handleGetHeroes = async () => {
+    dispatch(triggerLoading(true));
+    try {
+      const { data } = await getAxios<HeroModel[]>(EndPoints.heroes);
+      dispatch(saveHeroList(data));
+      // another HTTP request that requires the data above
+    } catch (e: any) {
+      alert(e.message);
+    } finally {
+      dispatch(triggerLoading(false));
     }
-  }, [dispatch, heroes.length]);
+  };
+
+  /*
+   *  IF NO heroAsyncActions.ts and extraReducers
+   *  Can avoid race condition issue
+   *  Can be used with multiple HTTP request
+   *  Can be used with states that don't belong in the store
+   *  Can easily be understood by develops who are new to React Redux
+   *  Easy to reason about
+   *  Easy to do optimistic updates
+   * */
+  const handleFetchHeroes = () => {
+    dispatch(triggerLoading(true));
+    fetch(EndPoints.heroes)
+      .then((response) => {
+        response.json().then((data: HeroModel[]) => {
+          dispatch(saveHeroList(data));
+        });
+      })
+      .catch((e: any) => {
+        alert(e.message);
+      })
+      .finally(() => {
+        dispatch(triggerLoading(false));
+      });
+  };
+
+  /*
+   *  IF NO heroAsyncActions.ts and extraReducers
+   *  Can avoid race condition issue
+   *  Can be used with multiple HTTP request
+   *  Can be used with states that don't belong in the store
+   *  Can easily be understood by develops who are new to React Redux
+   *  Easy to reason about
+   *  Easy to do optimistic updates
+   * */
+  const handleDeleteHero = async (id: string) => {
+    const previousHeroes = heroes;
+    dispatch(removeHeroFromStore(id)); // optimistic update
+    try {
+      await deleteAxios(EndPoints.heroes, id);
+    } catch (e: any) {
+      alert(e.message);
+      dispatch(saveHeroList(previousHeroes));
+    }
+  };
 
   return (
     <div>
@@ -68,7 +141,7 @@ const HeroesPage = () => {
                   variant={"contained"}
                   color={"secondary"}
                   data-testid={"remove-button"}
-                  onClick={() => dispatch(softDeleteHeroAction(h.id))}
+                  onClick={() => dispatch(removeHeroFromStore(h.id))}
                 >
                   Remove
                 </Button>{" "}
@@ -77,7 +150,10 @@ const HeroesPage = () => {
                   variant={"outlined"}
                   color={"secondary"}
                   data-testid={"delete-button"}
-                  onClick={() => dispatch(deleteHeroAction(h.id))}
+                  onClick={async () => {
+                    dispatch(deleteHeroAction(h.id));
+                    // await handleDeleteHero(h.id);
+                  }}
                 >
                   DELETE in DB
                 </Button>

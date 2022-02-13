@@ -3,7 +3,7 @@ export type HeroStateType = {
   readonly hero: HeroModel;
   readonly loading: boolean;
 
-  readonly tempData?: any[];
+  readonly tempData?: any;
 };
 
 export type ApiResponse = Record<string, any>;

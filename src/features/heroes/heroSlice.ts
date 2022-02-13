@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  deleteHeroAction,
   getHeroesAction,
+  deleteHeroAction,
   postHeroAction,
 } from "./heroAsyncActions";
 import { HeroModel, heroNamespace, HeroStateType } from "./heroTypes";
@@ -20,12 +20,23 @@ export const heroSlice = createSlice({
 
   // mutation using synchronous actions or without side effects
   reducers: {
-    softDeleteHeroAction: (state, action: PayloadAction<string>) => {
+    triggerLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    removeHeroFromStore: (state, action: PayloadAction<string>) => {
       state.heroes = state.heroes.filter((h) => h.id !== action.payload); // payload is the id of the object
+    },
+    saveHeroList: (state, action: PayloadAction<HeroModel[]>) => {
+      state.heroes = action.payload;
     },
   },
 
-  // mutation using asynchronous actions or with side effects
+  /*
+   * mutation using asynchronous actions or with side effects.
+   * INFO: NOT a requirements for redux-toolkit
+   * ALTERNATIVE: fetching data from API then dispatch a synchronous action
+   * The alternative is not an anti-pattern. This can easily be understood by developers new to React Reduxq
+   * */
   extraReducers: (builder) => {
     builder.addCase(getHeroesAction.pending, (state, action) => {
       state.loading = true;
@@ -68,4 +79,5 @@ export const heroSlice = createSlice({
 });
 
 // non-async actions
-export const { softDeleteHeroAction } = heroSlice.actions;
+export const { removeHeroFromStore, triggerLoading, saveHeroList } =
+  heroSlice.actions;

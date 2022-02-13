@@ -45,9 +45,9 @@ const SharedForm = () => {
             Save Character
           </Button>
         </Form>
-        {process.env.NODE_ENV !== "production" && (
+        {/* {process.env.NODE_ENV !== "production" && (
           <pre>{JSON.stringify(formik, null, 2)}</pre>
-        )}
+        )} */}
       </Paper>
     </Box>
   );

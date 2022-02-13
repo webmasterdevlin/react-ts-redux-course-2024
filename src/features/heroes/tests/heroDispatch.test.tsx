@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { deleteHeroAction, getHeroesAction } from "../heroAsyncActions";
-import { softDeleteHeroAction } from "../heroSlice";
 import { HeroStateType } from "../heroTypes";
 import { reduxStore } from "../../../store/configureStore";
 
@@ -21,7 +20,7 @@ describe("HeroesPage dispatch", () => {
     expect(state.heroes).toHaveLength(2);
   });
 
-  test("shoudl dispatch deleteHeroById with HTTP reques", async () => {
+  test("should dispatch deleteHeroById with HTTP request", async () => {
     await reduxStore.dispatch(deleteHeroAction(state.heroes[0].id));
     state = reduxStore.getState().hero;
     expect(state.heroes).toHaveLength(1);
