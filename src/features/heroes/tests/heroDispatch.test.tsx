@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { deleteHeroAction, getHeroesAction } from "../heroAsyncActions";
 import { HeroStateType } from "../heroTypes";
 import { reduxStore } from "../../../store/configureStore";

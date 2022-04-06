@@ -23,7 +23,7 @@ describe("Heroes Page", () => {
     const buttons = await screen.findAllByTestId("mark-button");
     expect(buttons).toHaveLength(2);
 
-    userEvent.click(buttons[0]);
+    await userEvent.click(buttons[0]);
     const cards = await screen.findAllByTestId("card");
     expect(cards[0]).toHaveTextContent("marked");
   });
@@ -32,7 +32,7 @@ describe("Heroes Page", () => {
     render(<HeroesPage />);
 
     const buttons = await screen.findAllByTestId("remove-button");
-    userEvent.click(buttons[0]);
+    await userEvent.click(buttons[0]);
     expect(screen.getByTestId("total-heroes")).toHaveTextContent("1");
   });
 
@@ -40,7 +40,7 @@ describe("Heroes Page", () => {
     render(<HeroesPage />);
 
     const buttons = await screen.findAllByTestId("delete-button");
-    userEvent.click(buttons[0]);
+    await userEvent.click(buttons[0]);
     expect(screen.getByTestId("total-heroes")).toHaveTextContent("1");
   });
 });
