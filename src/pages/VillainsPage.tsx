@@ -1,21 +1,51 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
-import { useFetchVillainsQuery } from "../features/villains/query";
+import {
+  useAddVillainMutation,
+  useFetchVillainsQuery,
+  useRemoveVillainMutation,
+} from "../features/villains/query";
 import { createStyles, makeStyles } from "@mui/styles";
 import TitleBar from "../components/TitleBar";
 import UpdateUiLabel from "../components/UpdateUiLabel";
+import * as yup from "yup";
+import SharedForm from "../components/SharedForm";
+import { Formik } from "formik";
 
 const VillainsPage = () => {
   // local state
   const [counter, setCounter] = useState("0");
 
   const { data = [], isFetching } = useFetchVillainsQuery();
+  const [addVillain] = useAddVillainMutation();
+  const [removeVillain] = useRemoveVillainMutation();
+
   const smallScreen = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
-
   return (
     <div>
       <TitleBar title={"Villains Page"} />
+      <Formik
+        initialValues={{
+          id: "",
+          firstName: "",
+          lastName: "",
+          house: "",
+          knownAs: "",
+        }}
+        validationSchema={yup.object({
+          firstName: yup.string().label("First Name").min(2).required(),
+          lastName: yup.string().label("Last Name").min(2).required(),
+          house: yup.string().label("House").required(),
+          knownAs: yup.string().label("Known as"),
+        })}
+        onSubmit={async (values, actions) => {
+          await addVillain(values);
+          actions.resetForm();
+        }}
+      >
+        {() => <SharedForm />}
+      </Formik>
       <UpdateUiLabel />
       <>
         {isFetching ? (
@@ -58,6 +88,9 @@ const VillainsPage = () => {
                   variant={"outlined"}
                   color={"secondary"}
                   data-testid={"delete-button"}
+                  onClick={async () => {
+                    await removeVillain(v.id);
+                  }}
                 >
                   DELETE in DB
                 </Button>

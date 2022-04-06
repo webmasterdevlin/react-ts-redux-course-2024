@@ -22,12 +22,29 @@ export const villainSlice = createApi({
     return {
       fetchVillains: builder.query<VillainModel[], void>({
         providesTags: ["villains"],
-        query() {
-          return `/villains`;
-        },
+        query: () => `/villains`,
+      }),
+      addVillain: builder.mutation<VillainModel, Partial<VillainModel>>({
+        query: (req) => ({
+          url: `/villains`,
+          method: "POST",
+          body: req,
+        }),
+        invalidatesTags: ["villains"],
+      }),
+      removeVillain: builder.mutation<void, string>({
+        query: (id) => ({
+          url: `/villains/${id}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["villains"],
       }),
     };
   },
 });
 
-export const { useFetchVillainsQuery } = villainSlice;
+export const {
+  useFetchVillainsQuery,
+  useAddVillainMutation,
+  useRemoveVillainMutation,
+} = villainSlice;
