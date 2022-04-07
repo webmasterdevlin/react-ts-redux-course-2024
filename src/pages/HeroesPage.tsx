@@ -105,64 +105,60 @@ const HeroesPage = () => {
 
   return (
     <div>
-      <TitleBar title={"Super Heroes Page"} />
+      <TitleBar
+        title={loading ? "Loading.. Please wait.." : "Super Heroes Page"}
+      />
       <FormSubmission handleCreateAction={postHeroAction} />
       <UpdateUiLabel />
       <>
-        {loading ? (
-          <Typography data-testid={"loading"} variant={"h2"}>
-            Loading.. Please wait..
-          </Typography>
-        ) : (
-          heroes.map((h) => (
-            <Box
-              key={h.id}
-              mb={2}
-              display={"flex"}
-              flexDirection={smallScreen ? "column" : "row"}
-              justifyContent={"space-between"}
-              data-testid={"card"}
-            >
-              <Typography>
-                <span>{`${h.firstName} ${h.lastName} is ${h.knownAs}`}</span>
-                {counter === h.id && <span> - marked</span>}
-              </Typography>
-              <div>
-                <Button
-                  className={classes.button}
-                  variant={"contained"}
-                  data-testid={"mark-button"}
-                  onClick={() => setCounter(h.id)}
-                >
-                  Mark
-                </Button>{" "}
-                <Button
-                  className={classes.button}
-                  variant={"contained"}
-                  color={"secondary"}
-                  data-testid={"remove-button"}
-                  onClick={() => dispatch(removeHeroFromStore(h.id))}
-                >
-                  Remove
-                </Button>{" "}
-                <Button
-                  className={classes.button}
-                  variant={"outlined"}
-                  color={"secondary"}
-                  data-testid={"delete-button"}
-                  onClick={async () => {
-                    dispatch(deleteHeroAction(h.id));
-                    // await handleDeleteHero(h.id);
-                  }}
-                >
-                  DELETE in DB
-                </Button>
-              </div>
-            </Box>
-          ))
-        )}
+        {heroes.map((h) => (
+          <Box
+            key={h.id}
+            mb={2}
+            display={"flex"}
+            flexDirection={smallScreen ? "column" : "row"}
+            justifyContent={"space-between"}
+            data-testid={"card"}
+          >
+            <Typography>
+              <span>{`${h.firstName} ${h.lastName} is ${h.knownAs}`}</span>
+              {counter === h.id && <span> - marked</span>}
+            </Typography>
+            <div>
+              <Button
+                className={classes.button}
+                variant={"contained"}
+                data-testid={"mark-button"}
+                onClick={() => setCounter(h.id)}
+              >
+                Mark
+              </Button>{" "}
+              <Button
+                className={classes.button}
+                variant={"contained"}
+                color={"secondary"}
+                data-testid={"remove-button"}
+                onClick={() => dispatch(removeHeroFromStore(h.id))}
+              >
+                Remove
+              </Button>{" "}
+              <Button
+                className={classes.button}
+                variant={"outlined"}
+                color={"secondary"}
+                data-testid={"delete-button"}
+                onClick={async () => {
+                  dispatch(deleteHeroAction(h.id));
+                  // await handleDeleteHero(h.id);
+                }}
+              >
+                DELETE in DB
+              </Button>
+            </div>
+          </Box>
+        ))}
       </>
-      {heroes.length === 0 && !loading && (
+      {heroes.length === 0 && (
         <Button
           data-testid={"refetch-button"}
           className={classes.button}

@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { pathNames } from "../LazyRoutes";
 import TotalOfCharacters from "./TotalOfCharacters";
 import { useAppSelector } from "../store/configureStore";
+import { useFetchVillainsQuery } from "../features/villains/query";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const { heroes } = useAppSelector((state) => state.hero);
-
+  const { data: villains = [] } = useFetchVillainsQuery();
   return (
     <AppBar position="static" style={{ marginBottom: "2rem" }}>
       <Toolbar>
@@ -40,6 +41,10 @@ const NavigationBar = () => {
           >
             VILLAINS
           </Button>
+          <TotalOfCharacters
+            collection={villains}
+            dataTestId={"total-villains"}
+          />
         </Box>
       </Toolbar>
     </AppBar>

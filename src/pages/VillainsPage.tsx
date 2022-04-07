@@ -25,62 +25,58 @@ const VillainsPage = () => {
   const classes = useStyles();
   return (
     <div>
-      <TitleBar title={"Villains Page"} />
+      <TitleBar
+        title={isFetching ? "Loading.. Please wait.." : "Villains Page"}
+      />
       <FormSubmission handleCreateAction={addVillain} />
       <UpdateUiLabel />
       <>
-        {isFetching ? (
-          <Typography data-testid={"loading"} variant={"h2"}>
-            Loading.. Please wait..
-          </Typography>
-        ) : (
-          data.map((v) => (
-            <Box
-              key={v.id}
-              mb={2}
-              display={"flex"}
-              flexDirection={smallScreen ? "column" : "row"}
-              justifyContent={"space-between"}
-              data-testid={"card"}
-            >
-              <Typography>
-                <span>{`${v.firstName} ${v.lastName} is ${v.knownAs}`}</span>
-                {counter === v.id && <span> - marked</span>}
-              </Typography>
-              <div>
-                <Button
-                  className={classes.button}
-                  variant={"contained"}
-                  data-testid={"mark-button"}
-                  onClick={() => setCounter(v.id)}
-                >
-                  Mark
-                </Button>{" "}
-                <Button
-                  className={classes.button}
-                  variant={"contained"}
-                  color={"secondary"}
-                  data-testid={"remove-button"}
-                >
-                  Remove
-                </Button>{" "}
-                <Button
-                  className={classes.button}
-                  variant={"outlined"}
-                  color={"secondary"}
-                  data-testid={"delete-button"}
-                  onClick={async () => {
-                    await removeVillain(v.id);
-                  }}
-                >
-                  DELETE in DB
-                </Button>
-              </div>
-            </Box>
-          ))
-        )}
+        {data.map((v) => (
+          <Box
+            key={v.id}
+            mb={2}
+            display={"flex"}
+            flexDirection={smallScreen ? "column" : "row"}
+            justifyContent={"space-between"}
+            data-testid={"card"}
+          >
+            <Typography>
+              <span>{`${v.firstName} ${v.lastName} is ${v.knownAs}`}</span>
+              {counter === v.id && <span> - marked</span>}
+            </Typography>
+            <div>
+              <Button
+                className={classes.button}
+                variant={"contained"}
+                data-testid={"mark-button"}
+                onClick={() => setCounter(v.id)}
+              >
+                Mark
+              </Button>{" "}
+              <Button
+                className={classes.button}
+                variant={"contained"}
+                color={"secondary"}
+                data-testid={"remove-button"}
+              >
+                Remove
+              </Button>{" "}
+              <Button
+                className={classes.button}
+                variant={"outlined"}
+                color={"secondary"}
+                data-testid={"delete-button"}
+                onClick={async () => {
+                  await removeVillain(v.id);
+                }}
+              >
+                DELETE in DB
+              </Button>
+            </div>
+          </Box>
+        ))}
       </>
-      {data.length === 0 && !isFetching && (
+      {data.length === 0 && (
         <Button
           data-testid={"refetch-button"}
           className={classes.button}
