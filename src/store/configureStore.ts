@@ -19,7 +19,7 @@ const reduxStore = configureStore({
       serializableCheck: false,
     })
       .concat(save())
-      .concat(villainSlice.middleware),
+      .concat(villainSlice.middleware), // for query caching
 
   devTools:
     process.env.NODE_ENV !== "production" || process.env.PUBLIC_URL.length > 0,

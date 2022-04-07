@@ -10,10 +10,13 @@ export type VillainModel = {
 } & ApiResponse;
 
 export const villainSlice = createApi({
+  // where to keep the data in the reducers
   reducerPath: "villain",
+  // fetchBaseQuery is a built-in fetch wrapper
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/",
     prepareHeaders(headers) {
+      headers.set("x-auth", "Bearer ...");
       return headers;
     },
   }),
@@ -21,7 +24,6 @@ export const villainSlice = createApi({
   endpoints(builder) {
     return {
       fetchVillains: builder.query<VillainModel[], void>({
-        providesTags: ["villains"],
         query: () => `/villains`,
       }),
       addVillain: builder.mutation<VillainModel, Partial<VillainModel>>({
@@ -30,19 +32,18 @@ export const villainSlice = createApi({
           method: "POST",
           body: req,
         }),
-        invalidatesTags: ["villains"],
       }),
       removeVillain: builder.mutation<void, string>({
         query: (id) => ({
           url: `/villains/${id}`,
           method: "DELETE",
         }),
-        invalidatesTags: ["villains"],
       }),
     };
   },
 });
 
+// auto generated react hooks
 export const {
   useFetchVillainsQuery,
   useAddVillainMutation,
