@@ -31,6 +31,7 @@ export const villainSlice = createApi({
           url: `/villains`,
           method: "POST",
           body: req,
+          providesTags: ["villain"],
         }),
       }),
       removeVillain: builder.mutation<void, string>({
@@ -38,6 +39,7 @@ export const villainSlice = createApi({
           url: `/villains/${id}`,
           method: "DELETE",
         }),
+        invalidatesTags: ["villains"],
       }),
     };
   },

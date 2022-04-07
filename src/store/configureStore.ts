@@ -18,7 +18,7 @@ const reduxStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     })
-      .concat(save())
+      .concat(save({ ignoreStates: ["villain"] }))
       .concat(villainSlice.middleware), // for query caching
 
   devTools:

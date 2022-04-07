@@ -4,23 +4,38 @@ import {
   useAddVillainMutation,
   useFetchVillainsQuery,
   useRemoveVillainMutation,
+  VillainModel,
+  villainSlice,
 } from "../features/villains/query";
 import { createStyles, makeStyles } from "@mui/styles";
 import TitleBar from "../components/TitleBar";
 import UpdateUiLabel from "../components/UpdateUiLabel";
-import * as yup from "yup";
-import SharedForm from "../components/SharedForm";
-import { Formik } from "formik";
 import FormSubmission from "../components/FormSubmission";
+import { useAppDispatch } from "../store/configureStore";
 
 const VillainsPage = () => {
+  const dispatch = useAppDispatch();
+
   // local state
   const [counter, setCounter] = useState("0");
 
-  const { data = [], isFetching } = useFetchVillainsQuery();
+  const { data = [], isFetching, refetch } = useFetchVillainsQuery();
   const [addVillain] = useAddVillainMutation();
   const [removeVillain] = useRemoveVillainMutation();
 
+  const softDeleteVillain = (id: string) => {
+    dispatch(
+      villainSlice.util.updateQueryData(
+        "fetchVillains",
+        undefined,
+        (draft: VillainModel[]) => {
+          const index = draft.findIndex((v) => v.id == id);
+          draft.splice(index, 1);
+        }
+      )
+    );
+    dispatch(villainSlice.util.invalidateTags(["villains"]));
+  };
   const smallScreen = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
   return (
@@ -58,6 +73,7 @@ const VillainsPage = () => {
                 variant={"contained"}
                 color={"secondary"}
                 data-testid={"remove-button"}
+                onClick={() => softDeleteVillain(v.id)}
               >
                 Remove
               </Button>{" "}
@@ -82,6 +98,7 @@ const VillainsPage = () => {
           className={classes.button}
           variant={"contained"}
           color={"primary"}
+          onClick={refetch}
         >
           Re-fetch
         </Button>
