@@ -7,12 +7,11 @@ import { AsyncThunkAction } from "@reduxjs/toolkit";
 import { HeroModel } from "../features/heroes/heroTypes";
 
 type Props = {
-  handleCreateAction: (
-    values: any
-  ) => AnyAction | AsyncThunkAction<HeroModel, HeroModel, {}>;
+  handleCreateAction: (values: any) => any;
+  hasDispatch?: boolean;
 };
 
-const FormSubmission = ({ handleCreateAction }: Props) => {
+const FormSubmission = ({ handleCreateAction, hasDispatch = false }: Props) => {
   const dispatch = useAppDispatch();
   return (
     <Formik
@@ -30,7 +29,11 @@ const FormSubmission = ({ handleCreateAction }: Props) => {
         knownAs: yup.string().label("Known as"),
       })}
       onSubmit={(values, actions) => {
-        dispatch(handleCreateAction(values));
+        if (hasDispatch) {
+          dispatch(handleCreateAction(values));
+        } else {
+          handleCreateAction(values);
+        }
         actions.resetForm();
       }}
     >

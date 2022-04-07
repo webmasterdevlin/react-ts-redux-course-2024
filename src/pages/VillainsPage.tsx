@@ -11,6 +11,7 @@ import UpdateUiLabel from "../components/UpdateUiLabel";
 import * as yup from "yup";
 import SharedForm from "../components/SharedForm";
 import { Formik } from "formik";
+import FormSubmission from "../components/FormSubmission";
 
 const VillainsPage = () => {
   // local state
@@ -25,27 +26,7 @@ const VillainsPage = () => {
   return (
     <div>
       <TitleBar title={"Villains Page"} />
-      <Formik
-        initialValues={{
-          id: "",
-          firstName: "",
-          lastName: "",
-          house: "",
-          knownAs: "",
-        }}
-        validationSchema={yup.object({
-          firstName: yup.string().label("First Name").min(2).required(),
-          lastName: yup.string().label("Last Name").min(2).required(),
-          house: yup.string().label("House").required(),
-          knownAs: yup.string().label("Known as"),
-        })}
-        onSubmit={async (values, actions) => {
-          await addVillain(values);
-          actions.resetForm();
-        }}
-      >
-        {() => <SharedForm />}
-      </Formik>
+      <FormSubmission handleCreateAction={addVillain} />
       <UpdateUiLabel />
       <>
         {isFetching ? (
