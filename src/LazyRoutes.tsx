@@ -10,18 +10,15 @@ const Loadable = (Component: ElementType) => (props: any) =>
 
 const HomePage = Loadable(lazy(() => import("./pages/HomePage")));
 const HeroesPage = Loadable(lazy(() => import("./pages/HeroesPage")));
-const VillainsPage = Loadable(lazy(() => import("./pages/VillainsPage")));
 
 type Paths = {
   home: string;
   heroes: string;
-  villains: string;
 };
 
 export const pathNames: Paths = {
   home: "/",
   heroes: "/heroes",
-  villains: "/villains",
 };
 
 const lazyRoutes: RouteObject[] = [
@@ -32,10 +29,6 @@ const lazyRoutes: RouteObject[] = [
   {
     path: pathNames.heroes,
     element: <HeroesPage />,
-  },
-  {
-    path: pathNames.villains,
-    element: <VillainsPage />,
   },
 ];
 
