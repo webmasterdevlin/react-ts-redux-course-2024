@@ -41,7 +41,7 @@ const HeroesPage = () => {
    *  Can avoid race condition issue
    *  Can be used with multiple HTTP request
    *  Can be used with states that don't belong in the store
-   *  Can easily be understood by develops who are new to React Redux
+   *  Can easily be understood by developers who are new to React Redux
    *  Easy to reason about
    *  Easy to do optimistic updates
    * */
@@ -63,7 +63,7 @@ const HeroesPage = () => {
    *  Can avoid race condition issue
    *  Can be used with multiple HTTP request
    *  Can be used with states that don't belong in the store
-   *  Can easily be understood by develops who are new to React Redux
+   *  Can easily be understood by developers who are new to React Redux
    *  Easy to reason about
    *  Easy to do optimistic updates
    * */
@@ -88,7 +88,7 @@ const HeroesPage = () => {
    *  Can avoid race condition issue
    *  Can be used with multiple HTTP request
    *  Can be used with states that don't belong in the store
-   *  Can easily be understood by develops who are new to React Redux
+   *  Can easily be understood by developers who are new to React Redux
    *  Easy to reason about
    *  Easy to do optimistic updates
    * */

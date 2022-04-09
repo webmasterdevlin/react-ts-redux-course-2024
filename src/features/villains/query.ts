@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApiResponse } from "../heroes/heroTypes";
 
 export type VillainModel = {
   id: string;
@@ -7,7 +6,7 @@ export type VillainModel = {
   lastName: string;
   house: string;
   knownAs: string;
-} & ApiResponse;
+};
 
 export const villainSlice = createApi({
   // where to keep the data in the reducers
