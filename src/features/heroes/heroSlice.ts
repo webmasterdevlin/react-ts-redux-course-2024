@@ -81,3 +81,21 @@ export const heroSlice = createSlice({
 // non-async actions
 export const { removeHeroFromStore, triggerLoading, saveHeroList } =
   heroSlice.actions;
+
+/*
+export const heroReducer = (
+  state: HeroStateType = initialState,
+  action: ActionType,
+): HeroStateType => {
+  switch (action.type) {
+    case HeroActionTypes.FETCH_HEROES_REQUEST:
+      return { ...state, loading: true };
+    case HeroActionTypes.FETCH_HEROES_SUCCESS:
+      return { ...state, loading: false, heroes: action.payload };
+    case HeroActionTypes.FETCH_HEROES_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+*/
