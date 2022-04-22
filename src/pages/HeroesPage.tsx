@@ -31,32 +31,10 @@ const HeroesPage = () => {
   const [counter, setCounter] = useState("0");
 
   useEffect(() => {
-    dispatch(getHeroesAction());
-    // handleGetHeroes();
     // handleFetchHeroes();
+    // handleGetHeroes();
+    dispatch(getHeroesAction());
   }, [dispatch]);
-
-  /*
-   *  IF NO heroAsyncActions.ts and extraReducers
-   *  Can avoid race condition issue
-   *  Can be used with multiple HTTP request
-   *  Can be used with states that don't belong in the store
-   *  Can easily be understood by develops who are new to React Redux
-   *  Easy to reason about
-   *  Easy to do optimistic updates
-   * */
-  const handleGetHeroes = async () => {
-    dispatch(triggerLoading(true));
-    try {
-      const { data } = await getAxios<HeroModel[]>(EndPoints.heroes);
-      dispatch(saveHeroList(data));
-      // another HTTP request that requires the data above
-    } catch (e: any) {
-      alert(e.message);
-    } finally {
-      dispatch(triggerLoading(false));
-    }
-  };
 
   /*
    *  IF NO heroAsyncActions.ts and extraReducers
@@ -81,6 +59,28 @@ const HeroesPage = () => {
       .finally(() => {
         dispatch(triggerLoading(false));
       });
+  };
+
+  /*
+   *  IF NO heroAsyncActions.ts and extraReducers
+   *  Can avoid race condition issue
+   *  Can be used with multiple HTTP request
+   *  Can be used with states that don't belong in the store
+   *  Can easily be understood by develops who are new to React Redux
+   *  Easy to reason about
+   *  Easy to do optimistic updates
+   * */
+  const handleGetHeroes = async () => {
+    dispatch(triggerLoading(true));
+    try {
+      const { data } = await getAxios<HeroModel[]>(EndPoints.heroes);
+      dispatch(saveHeroList(data));
+      // another HTTP request that requires the data above
+    } catch (e: any) {
+      alert(e.message);
+    } finally {
+      dispatch(triggerLoading(false));
+    }
   };
 
   /*
