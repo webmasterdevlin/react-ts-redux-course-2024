@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "backend": "json-server --watch src/json-server/db.json --port 5000 --delay=1000 --routes src/json-server/routes.json",
+    "start:fullstack": "concurrently \"npm run backend\" \"npm run start\""
+  },
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -31,14 +39,6 @@
     "typescript": "^4.6.3",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "backend": "json-server --watch src/json-server/db.json --port 5000 --delay=1000 --routes src/json-server/routes.json",
-    "start:fullstack": "concurrently \"npm run backend\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
