@@ -138,4 +138,4 @@
 ## Villain Page
 - create ./src/pages/VillainPage.tsx
 - create features/villains/query.ts
-- 
+- update the ./src/pages/VillainPage.tsx
