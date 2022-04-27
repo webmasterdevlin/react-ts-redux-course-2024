@@ -133,3 +133,9 @@
 - create the SharedInput.tsx, ShareForm.tsx, and FormSubmission.tsx in the components folder
 - create a button to add a hero
 - import the FormSubmission on the HeroesPage and past the postHeroAction
+
+
+## Villain Page
+- create ./src/pages/VillainPage.tsx
+- create features/villains/query.ts
+- 

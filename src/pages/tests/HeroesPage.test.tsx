@@ -13,7 +13,7 @@ describe("Heroes Page", () => {
   it("should render loading message", () => {
     render(<HeroesPage />);
 
-    const loading = screen.getByTestId("loading");
+    const loading = screen.getByTestId("title-page");
     expect(loading).toHaveTextContent(/loading.. please wait../i);
   });
 
