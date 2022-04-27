@@ -3,14 +3,16 @@ import { createStyles, makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { pathNames } from "../LazyRoutes";
 import TotalOfCharacters from "./TotalOfCharacters";
-import { useAppSelector } from "../store/configureStore";
-import { useFetchVillainsQuery } from "../features/villains/query";
+import { useState } from "react";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
-  const { heroes } = useAppSelector((state) => state.hero);
-  const { data: villains = [] } = useFetchVillainsQuery();
+
+  // TODO: use Redux to replace the heroes and villains
+  const [heroes, setHeroes] = useState([]);
+  const [villains, setVillains] = useState([]);
+
   return (
     <AppBar position="static" style={{ marginBottom: "2rem" }}>
       <Toolbar>

@@ -1,41 +1,18 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
-import {
-  useAddVillainMutation,
-  useFetchVillainsQuery,
-  useRemoveVillainMutation,
-  VillainModel,
-  villainSlice,
-} from "../features/villains/query";
 import { createStyles, makeStyles } from "@mui/styles";
 import TitleBar from "../components/TitleBar";
 import UpdateUiLabel from "../components/UpdateUiLabel";
 import FormSubmission from "../components/FormSubmission";
-import { useAppDispatch } from "../store/configureStore";
 
 const VillainsPage = () => {
-  const dispatch = useAppDispatch();
-
   // local state
   const [counter, setCounter] = useState("0");
 
-  const { data = [], isFetching, refetch } = useFetchVillainsQuery();
-  const [addVillain] = useAddVillainMutation();
-  const [removeVillain] = useRemoveVillainMutation();
+  // TODO: use Redux to replace the data and isFetching
+  const [data, setData] = useState<any[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const softDeleteVillain = (id: string) => {
-    dispatch(
-      villainSlice.util.updateQueryData(
-        "fetchVillains",
-        undefined,
-        (draft: VillainModel[]) => {
-          const index = draft.findIndex((v) => v.id == id);
-          draft.splice(index, 1);
-        }
-      )
-    );
-    dispatch(villainSlice.util.invalidateTags(["villains"]));
-  };
   const smallScreen = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
   return (
@@ -43,7 +20,7 @@ const VillainsPage = () => {
       <TitleBar
         title={isFetching ? "Loading.. Please wait.." : "Villains Page"}
       />
-      <FormSubmission handleCreateAction={addVillain} />
+      <FormSubmission handleCreateAction={() => {}} />
       <UpdateUiLabel />
       <>
         {data.map((v) => (
@@ -73,7 +50,7 @@ const VillainsPage = () => {
                 variant={"contained"}
                 color={"secondary"}
                 data-testid={"remove-button"}
-                onClick={() => softDeleteVillain(v.id)}
+                onClick={() => {}}
               >
                 Remove
               </Button>{" "}
@@ -82,9 +59,7 @@ const VillainsPage = () => {
                 variant={"outlined"}
                 color={"secondary"}
                 data-testid={"delete-button"}
-                onClick={async () => {
-                  await removeVillain(v.id);
-                }}
+                onClick={async () => {}}
               >
                 DELETE in DB
               </Button>
@@ -98,7 +73,7 @@ const VillainsPage = () => {
           className={classes.button}
           variant={"contained"}
           color={"primary"}
-          onClick={refetch}
+          onClick={() => {}}
         >
           Re-fetch
         </Button>

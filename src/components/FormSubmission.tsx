@@ -1,7 +1,6 @@
 import { Formik } from "formik";
 import * as yup from "yup";
 import SharedForm from "../components/SharedForm";
-import { useAppDispatch } from "../store/configureStore";
 
 type Props = {
   handleCreateAction: (values: any) => any;
@@ -9,7 +8,6 @@ type Props = {
 };
 
 const FormSubmission = ({ handleCreateAction, hasDispatch = false }: Props) => {
-  const dispatch = useAppDispatch();
   return (
     <Formik
       initialValues={{
@@ -27,7 +25,6 @@ const FormSubmission = ({ handleCreateAction, hasDispatch = false }: Props) => {
       })}
       onSubmit={(values, actions) => {
         if (hasDispatch) {
-          dispatch(handleCreateAction(values));
         } else {
           handleCreateAction(values);
         }
