@@ -6,15 +6,13 @@ export type HeroStateType = {
   readonly tempData?: any;
 };
 
-export type ApiResponse = Record<string, any>;
-
 export type HeroModel = {
   id: string;
   firstName: string;
   lastName: string;
   house: string;
   knownAs: string;
-} & ApiResponse;
+};
 
 // action types
 export const heroNamespace = "hero";

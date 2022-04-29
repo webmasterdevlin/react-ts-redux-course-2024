@@ -29,7 +29,7 @@ const VillainsPage = () => {
         "fetchVillains",
         undefined,
         (draft: VillainModel[]) => {
-          const index = draft.findIndex((v) => v.id == id);
+          const index = draft.findIndex((v) => v.id === id);
           draft.splice(index, 1);
         }
       )
