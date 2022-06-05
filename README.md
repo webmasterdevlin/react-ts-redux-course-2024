@@ -1,7 +1,12 @@
 # Steps
 
-- npx create-react-app my-app --template=typescript
-- cd my-app
+```bash
+npx create-react-app my-app --template=typescript
+```
+
+```bash
+cd my-app
+```
 
 ## Pick your UI library or UI framework
 
@@ -18,7 +23,10 @@
 
 #### Future pages will be registered in your router.
 
-- npm i -D prettier
+```bash
+npm i -D prettier
+```
+
 - create ./src/pages/HomePage.tsx, ./src/pages/AnotherPage.tsx, etc, with the name of the page as the h1 for POC
 - npm i react-router react-router-dom
 - create a component, EagerRoutes.tsx, to register the pages
@@ -46,19 +54,28 @@
 
 ## Set up generic http services
 
-- npm i axios
+```bash
+npm i axios
+```
+
 - create ./src/api/genericApiCalls.ts
 
 ## Set up json-server and concurrently
 
-- npm i -D json-server concurrently
+```bash
+npm i -D json-server concurrently
+```
+
 - create ./src/json-server/db.json and ./src/json-server/routes.json
 - add proxy in the packages.json
 - update the scripts
 
 ## Set up the hero feature for redux
 
-- npm i @reduxjs/toolkit react-redux redux-injectors redux
+```bash
+npm i @reduxjs/toolkit react-redux redux-injectors redux
+```
+
 - create a feature folder, ./src/features
 - create heroes folder inside the features
 - create heroTypes.ts for the hero type/model, action type, and state type
@@ -88,7 +105,10 @@
 
 ## Set up MSW for mocking API calls
 
-- npm i -D msw
+```bash
+npm i -D msw
+```
+
 - the msw is a mocking library which will intercept the requests and responses in the integration tests
 - create ./src/mocks/handler/heroHandler.ts
 - create ./src/mocks/handler/index.ts
@@ -124,18 +144,20 @@
 
 ## Add hero
 
-- npm i formik yup
+```bash
+npm i formik yup
+```
+
 - create a function to add a hero by updating the ./src/feature/heroes
 - update the heroTypes.ts
 - update the heroAsyncActions.ts
 - update the heroSlice.ts
-- npm i formik yup
 - create the SharedInput.tsx, ShareForm.tsx, and FormSubmission.tsx in the components folder
 - create a button to add a hero
 - import the FormSubmission on the HeroesPage and past the postHeroAction
 
-
 ## Villain Page
+
 - create ./src/pages/VillainPage.tsx
 - create features/villains/query.ts
 - update the ./src/pages/VillainPage.tsx
