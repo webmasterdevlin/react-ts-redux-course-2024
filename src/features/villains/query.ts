@@ -13,7 +13,7 @@ export const villainSlice = createApi({
   reducerPath: "villain",
   // fetchBaseQuery is a built-in fetch wrapper
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api/",
+    baseUrl: "/api",
     prepareHeaders(headers) {
       headers.set("x-auth", "Bearer ...");
       return headers;
@@ -24,6 +24,7 @@ export const villainSlice = createApi({
     return {
       fetchVillains: builder.query<VillainModel[], void>({
         query: () => `/villains`,
+        providesTags: ["villains"],
       }),
       addVillain: builder.mutation<VillainModel, Partial<VillainModel>>({
         query: (req) => ({
@@ -38,6 +39,10 @@ export const villainSlice = createApi({
           url: `/villains/${id}`,
           method: "DELETE",
         }),
+        /* optimistic update */
+        // onQueryStarted(id, { dispatch, queryFulfilled }) {
+        //   dispatch(villainSlice.util.invalidateTags(["villains"]));
+        // },
         invalidatesTags: ["villains"],
       }),
     };
