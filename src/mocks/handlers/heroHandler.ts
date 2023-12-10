@@ -1,4 +1,4 @@
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 
 const baseUrl = "http://localhost/api";
 
@@ -20,13 +20,12 @@ export const heroesFixture = [
 ];
 
 export const heroHandler = [
-  rest.get(`${baseUrl}/heroes`, (req, res, ctx) => {
-    return res(ctx.json(heroesFixture));
+  http.get(`${baseUrl}/heroes`, () => {
+    return HttpResponse.json(heroesFixture);
   }),
 
-  rest.delete(`${baseUrl}/heroes/:id`, (req, res, ctx) => {
-    return heroesFixture.find((h) => h.id === req.params.id)
-      ? res(ctx.status(200))
-      : res(ctx.status(404));
+  http.delete(`${baseUrl}/heroes/:id`, ({ params }) => {
+    const exist = heroesFixture.find((h) => h.id === params.id);
+    return new HttpResponse(null, { status: exist ? 200 : 404 });
   }),
 ];

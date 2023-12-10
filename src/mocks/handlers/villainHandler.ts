@@ -1,4 +1,4 @@
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 
 const baseUrl = "http://localhost/api";
 
@@ -20,13 +20,12 @@ export const villainsFixture = [
 ];
 
 export const villainHandler = [
-  rest.get(`${baseUrl}/villains`, (req, res, ctx) => {
-    return res(ctx.json(villainsFixture));
+  http.get(`${baseUrl}/villains`, () => {
+    return HttpResponse.json(villainsFixture);
   }),
 
-  rest.delete(`${baseUrl}/villains/:id`, (req, res, ctx) => {
-    return villainsFixture.find((h) => h.id === req.params.id)
-      ? res(ctx.status(200))
-      : res(ctx.status(404));
+  http.delete(`${baseUrl}/villains/:id`, ({ params }) => {
+    const exist = villainsFixture.find((h) => h.id === params.id);
+    return new HttpResponse(null, { status: exist ? 200 : 404 });
   }),
 ];
