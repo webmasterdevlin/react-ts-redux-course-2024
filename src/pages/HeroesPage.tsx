@@ -108,7 +108,7 @@ const HeroesPage = () => {
       <TitleBar
         title={loading ? "Loading.. Please wait.." : "Super Heroes Page"}
       />
-      <FormSubmission handleCreateAction={postHeroAction} />
+      <FormSubmission handleCreateAction={postHeroAction} hasDispatch={true} />
       <UpdateUiLabel />
       <>
         {heroes.map((h) => (
