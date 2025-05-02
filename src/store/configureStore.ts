@@ -5,7 +5,7 @@ import { heroSlice } from "../features/heroes/heroSlice";
 import { villainSlice } from "../features/villains/query";
 
 const reduxStore = configureStore({
-  preloadedState: load(),
+  // preloadedState: load(),
 
   reducer: {
     // rtk
@@ -18,7 +18,7 @@ const reduxStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     })
-      .concat(save({ ignoreStates: ["villain"] }))
+      // .concat(save({ ignoreStates: ["villain"] }))
       .concat(villainSlice.middleware), // for query caching
 
   devTools:

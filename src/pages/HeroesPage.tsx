@@ -15,10 +15,15 @@ import {
   removeHeroFromStore,
   triggerLoading,
 } from "../features/heroes/heroSlice";
-import { useAppDispatch, useAppSelector } from "../store/configureStore";
+import { AppDispatch, useAppDispatch, useAppSelector } from "../store/configureStore";
 import { deleteAxios, getAxios } from "../axios/generic-api-calls";
 import { HeroModel } from "../features/heroes/heroTypes";
 import { EndPoints } from "../axios/api-config";
+
+// export async function loader(dispatch: AppDispatch) {
+//   return dispatch(getHeroesAction());
+// }
+
 
 const HeroesPage = () => {
   const dispatch = useAppDispatch();
@@ -31,8 +36,8 @@ const HeroesPage = () => {
   const [counter, setCounter] = useState("0");
 
   useEffect(() => {
-    dispatch(getHeroesAction());
-    // handleGetHeroes();
+    // dispatch(getHeroesAction());
+    handleGetHeroes();
     // handleFetchHeroes();
   }, [dispatch]);
 
