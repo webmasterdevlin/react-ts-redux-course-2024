@@ -18,7 +18,7 @@
     "@mui/lab": "^5.0.0-alpha.176",
     "@mui/material": "^5.17.1",
     "@mui/styles": "^5.17.1",
-    "@reduxjs/toolkit": "^2.7.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.6.1",
